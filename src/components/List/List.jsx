@@ -1,5 +1,6 @@
 import React from "react";
 import Form from '../Form/Form'
+import ListItem from "./ListItem/ListItem";
 import './List.css'
 
 
@@ -60,7 +61,6 @@ export default class List extends React.Component {
     }
 
     shouldComponentUpdate() {
-        
         console.log('List should update?')
         return true
     }
@@ -91,9 +91,9 @@ export default class List extends React.Component {
 
         return (
         <div className="list">
-            <Form addName={this.addName}></Form>
+            <Form addName={this.addName}/>
             <ul>
-                {this.state.names.map((name)=><div key={name.id}>{name.name}</div>)}
+                {this.state.names.map((name)=><ListItem {...name} key={name.id} removeName={this.removeName} />)}
             </ul>
         </div>
         )
