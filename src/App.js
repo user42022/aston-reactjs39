@@ -1,10 +1,10 @@
 import './App.css';
-import Form from './components/Form/Form';
+import List from './components/List/List'
 
 function App() {
   return (
     <div>
-      <Form addName={console.log} componentName={'Form'}/>
+      <List/>
     </div>
   );
 }
