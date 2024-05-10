@@ -1,44 +1,45 @@
 import React from "react";
 import './ListItem.css'
 
-export default class ListItem extends React.Component{
-    constructor(props) {
-        super(props);
-        this.removeName = this.removeName.bind(this)
+export default class ListItem extends React.Component {
 
-        console.log('ListItem constructed')
-    }
+  constructor(props) {
+    super(props);
 
-    removeName(){
-        this.props.removeName(this.props.id)
-    }
+    this.removeName = this.removeName.bind(this)
 
-    componentDidMount() {
-        console.log('ListItem mounted')
-    }
+    console.log('ListItem constructed')
+  }
 
-    componentDidUpdate() {
-        console.log('ListItem updated')
-    }
+  removeName() {
+    this.props.removeName(this.props.id)
+  }
 
-    componentWillUnmount() {
-        console.log('ListItem will remove')
-    }
+  componentDidMount() {
+    console.log('ListItem mounted')
+  }
 
-    shouldComponentUpdate() {
-        console.log('ListItem should update?')
-        return false
-    }
+  componentDidUpdate() {
+    console.log('ListItem updated')
+  }
 
+  componentWillUnmount() {
+    console.log('ListItem will remove')
+  }
 
-    render() {
-        console.log('ListItem rendered')
+  shouldComponentUpdate() {
+    console.log('ListItem should update?')
+    return false
+  }
 
 
-        return (
-            <li className="list-item">
-                <span>{this.props.name}</span><input type="button" value="remove" onClick={this.removeName} />
-            </li>
-        )
-    }
+  render() {
+    console.log('ListItem rendered')
+
+    return (
+      <li className="list-item">
+        <span>{this.props.name}</span><input type="button" value="remove" onClick={this.removeName} />
+      </li>
+    )
+  }
 }
