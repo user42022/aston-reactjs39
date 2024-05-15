@@ -1,45 +1,23 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './ListItem.css'
 
-export default class ListItem extends React.Component {
+function ListItem({name, id, removeName}) {
+  console.log(`ListItem name: ${name}, id: ${id} rendered`)
 
-  constructor(props) {
-    super(props);
+  useEffect(() => {
+    console.log(`ListItem name: ${name}, id: ${id} did update`);
+    return ()=> console.log(`ListItem name: ${name}, id: ${id} unmounted`);
+  })
 
-    this.removeName = this.removeName.bind(this)
-
-    console.log('ListItem constructed')
+  const removeListItem = () => {
+    removeName(id);
   }
 
-  removeName() {
-    this.props.removeName(this.props.id)
-  }
-
-  componentDidMount() {
-    console.log('ListItem mounted')
-  }
-
-  componentDidUpdate() {
-    console.log('ListItem updated')
-  }
-
-  componentWillUnmount() {
-    console.log('ListItem will remove')
-  }
-
-  shouldComponentUpdate() {
-    console.log('ListItem should update?')
-    return false
-  }
-
-
-  render() {
-    console.log('ListItem rendered')
-
-    return (
-      <li className="list-item">
-        <span>{this.props.name}</span><input type="button" value="remove" onClick={this.removeName} />
-      </li>
-    )
-  }
+  return (
+    <li className="list-item">
+      <span>{name}</span><input type="button" value="remove" onClick={removeListItem} />
+    </li>
+  )
 }
+
+export default React.memo(ListItem)
