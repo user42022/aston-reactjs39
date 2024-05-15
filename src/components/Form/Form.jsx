@@ -16,16 +16,23 @@ export default class Form extends React.Component {
     console.log('Form constructed')
   }
 
+  submitRef = React.createRef()
+
   addName() {
     this.props.addName({ ...this.state, id: +new Date() })
   }
 
   updateName(event) {
-    this.setState(() => {
-      return { name: event.target.value }
-    })
-  }
+    if (event.target.value === 'реакт') {
+      this.submitRef.current.disabled = true
+    } else {
+      this.submitRef.current.removeAttribute('disabled')
+    }
 
+    this.setState(() => {
+        return { name: event.target.value }
+    });
+  }
 
   static getDerivedStateFromProps() {
     console.log('Form getDerivedStateFromProps')
@@ -91,7 +98,7 @@ export default class Form extends React.Component {
       <div className="form">
         <label htmlFor="name">name</label>
         <input type="text" id="name" onInput={this.updateName} />
-        <input type="button" value="Add" onClick={this.addName} />
+        <input ref={this.submitRef} type="button" value="Add" onClick={this.addName} />
       </div>
     )
   }
