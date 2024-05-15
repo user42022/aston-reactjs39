@@ -12,11 +12,12 @@ export default class Form extends React.Component {
     }
     this.updateName = this.updateName.bind(this)
     this.addName = this.addName.bind(this)
-
+    this.focusInput = this.focusInput.bind(this)
     console.log('Form constructed')
   }
 
   submitRef = React.createRef()
+  inputRef = React.createRef()
 
   addName() {
     this.props.addName({ ...this.state, id: +new Date() })
@@ -32,6 +33,10 @@ export default class Form extends React.Component {
     this.setState(() => {
         return { name: event.target.value }
     });
+  }
+
+  focusInput() {
+    this.inputRef.current.focus()
   }
 
   static getDerivedStateFromProps() {
@@ -97,8 +102,9 @@ export default class Form extends React.Component {
     return (
       <div className="form">
         <label htmlFor="name">name</label>
-        <input type="text" id="name" onInput={this.updateName} />
+        <input ref={this.inputRef} type="text" id="name" onInput={this.updateName} />
         <input ref={this.submitRef} type="button" value="Add" onClick={this.addName} />
+        <input type="button" value="Focus" onClick={this.focusInput} />
       </div>
     )
   }
